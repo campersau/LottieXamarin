@@ -1,0 +1,65 @@
+name: Update Android
+
+# https://search.maven.org/artifact/com.airbnb.android/lottie
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'lottie-android ref'
+        required: true
+        default: v3.4.4
+
+jobs:
+  lottie-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: airbnb/lottie-android
+          ref: ${{ github.event.inputs.ref }}
+
+      - run: ./gradlew assembleRelease androidJavadocsJar
+
+      - run: mv lottie/build/outputs/aar/lottie-release.aar lottie-${{ github.event.inputs.ref }}.aar
+      - run: mv lottie/build/libs/lottie-javadoc.jar lottie-${{ github.event.inputs.ref }}-sources.jar
+
+      - name: Upload aar
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-aar
+          path: lottie-${{ github.event.inputs.ref }}.aar
+
+      - name: Upload javadoc
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-javadoc
+          path: lottie-${{ github.event.inputs.ref }}-sources.jar
+
+  pr:
+    runs-on: ubuntu-latest
+    needs: lottie-android
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: rm Lottie.Android/Jars/*.aar
+      - run: rm Lottie.Android/JavaDocs/*.jar
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-aar
+          path: Lottie.Android/Jars
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-javadoc
+          path: Lottie.Android/JavaDocs
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update lottie-android to ${{ github.event.inputs.ref }}
+          title: Update lottie-android to ${{ github.event.inputs.ref }}
+          labels: dependencies
+          branch: update-lottie-android
+          branch-suffix: random
