@@ -24,7 +24,7 @@ namespace LottieSamples.iOS
         private ViewBackgroundColorEnum backgroundColor;
         private UIToolbar toolbar;
         private UISlider slider;
-        private LOTAnimationView laAnimation;
+        private CompatibleAnimationView laAnimation;
 
         public AnimationExplorerViewController() : base()
         {
@@ -36,7 +36,7 @@ namespace LottieSamples.iOS
 
             this.SetBackgroundColor(ViewBackgroundColorEnum.White);
 
-            this.laAnimation = new LOTAnimationView();
+            this.laAnimation = new CompatibleAnimationView();
             this.toolbar = new UIToolbar(CGRect.Empty);
 
             UIBarButtonItem open = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, OpenEventHandler);
@@ -63,7 +63,7 @@ namespace LottieSamples.iOS
             this.View.AddSubview(toolbar);
 
             this.slider = new UISlider(CGRect.Empty);
-            this.slider.ValueChanged += (sender, e) => this.laAnimation.AnimationProgress = this.slider.Value; ;
+            this.slider.ValueChanged += (sender, e) => this.laAnimation.CurrentProgress = this.slider.Value; ;
             this.slider.MinValue = 0f;
             this.slider.MaxValue = 1f;
             this.View.AddSubview(this.slider);
@@ -171,7 +171,7 @@ namespace LottieSamples.iOS
             {
                 if (!string.IsNullOrEmpty(fileName))
                 {
-                    this.LoadAnimationNamed(fileName);
+                    this.LoadAnimationNamed(fileName.Replace(".json", ""));
                 }
                 this.DismissViewController(animated: true, completionHandler: null);
             };
@@ -186,7 +186,7 @@ namespace LottieSamples.iOS
             this.laAnimation = null;
             this.ResetAllButtons();
 
-            this.laAnimation = LOTAnimationView.AnimationNamed(named);
+            this.laAnimation = new CompatibleAnimationView(CompatibleAnimation.Named(named));
             this.laAnimation.ContentMode = UIViewContentMode.ScaleAspectFit;
             this.View.AddSubview(this.laAnimation);
             this.View.SetNeedsLayout();
@@ -195,14 +195,14 @@ namespace LottieSamples.iOS
 
         private void LoadAnimationFromUrl(string url)
         {
-            this.laAnimation.RemoveFromSuperview();
-            this.laAnimation = null;
-            this.ResetAllButtons();
+            //this.laAnimation.RemoveFromSuperview();
+            //this.laAnimation = null;
+            //this.ResetAllButtons();
 
-            this.laAnimation = new LOTAnimationView(new Foundation.NSUrl(url));
-            this.laAnimation.ContentMode = UIViewContentMode.ScaleAspectFit;
-            this.View.AddSubview(laAnimation);
-            this.View.SetNeedsLayout();
+            //this.laAnimation = new LOTAnimationView(new Foundation.NSUrl(url));
+            //this.laAnimation.ContentMode = UIViewContentMode.ScaleAspectFit;
+            //this.View.AddSubview(laAnimation);
+            //this.View.SetNeedsLayout();
         }
 
         private void ResetAllButtons()
@@ -251,9 +251,9 @@ namespace LottieSamples.iOS
         private async void LoopEventHandler(object sender, EventArgs e)
         {
             UIBarButtonItem button = sender as UIBarButtonItem;
-            this.laAnimation.LoopAnimation = !this.laAnimation.LoopAnimation;
-            this.ResetButton(button, highlighted: this.laAnimation.LoopAnimation);
-            await this.ShowMessageAsync(this.laAnimation.LoopAnimation ? "Loop Enabled" : "Loop Disabled");
+            this.laAnimation.LoopAnimationCount = this.laAnimation.LoopAnimationCount == -1 ? 1 : -1;
+            this.ResetButton(button, highlighted: this.laAnimation.LoopAnimationCount == -1);
+            await this.ShowMessageAsync(this.laAnimation.LoopAnimationCount == -1 ? "Loop Enabled" : "Loop Disabled");
         }
 
         private void CloseEventHandler(object sender, EventArgs e)
@@ -307,7 +307,7 @@ namespace LottieSamples.iOS
 
         private void UpdateProgressSlider()
         {
-            this.slider.Value = (float)this.laAnimation.AnimationProgress;
+            this.slider.Value = (float)this.laAnimation.CurrentProgress;
         }
     }
 }

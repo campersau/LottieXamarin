@@ -1,0 +1,127 @@
+name: Update iOS
+
+# https://www.npmjs.com/package/lottie-ios
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'lottie-ios ref'
+        required: true
+        default: 3.1.8
+
+jobs:
+  lottie-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          #repository: airbnb/lottie-ios
+          repository: campersau/lottie-ios
+          ref: ${{ github.event.inputs.ref }}
+
+      # build lottie-ios for different platforms
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-ios
+      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
+      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvsimulator CONFIGURATION_BUILD_DIR=build/lottie-appletvsimulator
+
+      # download sharpie
+      - run: wget https://dl.xamarin.com/objective-sharpie/ObjectiveSharpie.pkg
+      - run: sudo installer -pkg "ObjectiveSharpie.pkg" -target /
+
+      # create bindings from headers
+      - run: sharpie bind -output "build/lottie-ios" -namespace "Airbnb.Lottie" -framework "build/lottie-ios/Lottie.framework"
+      - run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
+        continue-on-error: true
+      - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
+
+      # remove dSYMs
+      - run: rm -rf build/**/Lottie.framework.dSYM
+
+      # copy and rename bindings
+      - run: mv build/lottie-ios/ApiDefinitions.cs build/ApiDefinitions.Ios.cs
+      - run: mv build/lottie-macos/ApiDefinitions.cs build/ApiDefinitions.Mac.cs
+      - run: mv build/lottie-tvos/ApiDefinitions.cs build/ApiDefinitions.Tv.cs
+
+      # fix some known issues
+      ## comment out "using Lottie;"
+      - run: sed -i '' -e 's.using Lottie;.//using Lottie;.g' build/ApiDefinitions*.cs
+      ## rename "CGContextRef*" to "CGContext"
+      - run: sed -i '' -e 's.CGContextRef\*.CGContext.g' build/ApiDefinitions*.cs
+      ## rename "CGImageRef*" to "CGImage"
+      - run: sed -i '' -e 's.CGImageRef\*.CGImage.g' build/ApiDefinitions*.cs
+      ## comment out NSCoder constructors
+      - run: sed -i '' -e 's.\[Export ("initWithCoder./*[Export ("initWithCoder.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.IntPtr Constructor (NSCoder aDecoder);.IntPtr Constructor (NSCoder aDecoder);*/.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.IntPtr Constructor (NSCoder coder);.IntPtr Constructor (NSCoder coder);*/.g' build/ApiDefinitions*.cs
+
+      # upload frameworks / bindings
+      - name: Upload lottie-ios
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-ios
+          path: build/*
+
+  swiftclassify:
+    runs-on: windows-latest
+    needs: lottie-ios
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: Flash3001/SwiftClassify
+          ref: master
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - run: msbuild /p:Configuration=Release SwiftClassify.sln
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-ios
+          path: build
+
+      # add generated swift names
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe build/lottie-ios/Lottie.framework/Headers/Lottie-Swift.h build/ApiDefinitions.Ios.cs
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h build/ApiDefinitions.Mac.cs
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe build/lottie-tvos/Lottie.framework/Headers/Lottie-Swift.h build/ApiDefinitions.Tv.cs
+
+      # rename files...
+      - run: Move-Item -Force -Path build/ApiDefinitions.IosNew.cs -Destination build/ApiDefinitions.Ios.cs
+      - run: Move-Item -Force -Path build/ApiDefinitions.MacNew.cs -Destination build/ApiDefinitions.Mac.cs
+        continue-on-error: true
+      - run: Move-Item -Force -Path build/ApiDefinitions.TvNew.cs -Destination build/ApiDefinitions.Tv.cs
+
+      # upload frameworks / bindings
+      - name: Upload lottie-ios
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-ios
+          path: build/*
+
+  pr:
+    runs-on: ubuntu-latest
+    needs: swiftclassify
+    steps:
+      - uses: actions/checkout@v2
+
+      # remove existing frameworks / bindings
+      - run: rm -rf Lottie.iOS/**/Lottie.framework
+      - run: rm -rf Lottie.iOS/ApiDefinitions*.cs
+
+      # remove frameworks / bindings into their folder
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-ios
+          path: Lottie.iOS
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update lottie-ios to ${{ github.event.inputs.ref }}
+          title: Update lottie-ios to ${{ github.event.inputs.ref }}
+          labels: dependencies
+          branch: update-lottie-ios
+          branch-suffix: random

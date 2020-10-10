@@ -4,6 +4,7 @@ using Foundation;
 
 namespace Airbnb.Lottie
 {
+	/*
     public partial class LOTAnimationView
     {
         /// <summary>
@@ -61,4 +62,5 @@ namespace Airbnb.Lottie
 		}
 
     }
+	*/
 }

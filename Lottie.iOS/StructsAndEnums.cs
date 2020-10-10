@@ -3,6 +3,7 @@ using ObjCRuntime;
 
 namespace Airbnb.Lottie
 {
+	/*
 	[Native]
 	public enum LOTViewContentMode : ulong
 	{
@@ -20,4 +21,5 @@ namespace Airbnb.Lottie
 		BottomLeft,
 		BottomRight
 	}
+	*/
 }

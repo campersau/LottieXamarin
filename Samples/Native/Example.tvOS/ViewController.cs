@@ -6,7 +6,7 @@ namespace Example.tvOS
 {
     public partial class ViewController : UIViewController
     {
-        private LOTAnimationView lottieLogo;
+        private CompatibleAnimationView lottieLogo;
 
         public ViewController(IntPtr handle) : base(handle)
         {
@@ -15,11 +15,11 @@ namespace Example.tvOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.lottieLogo = LOTAnimationView.AnimationNamed("LottieLogo1");
+            this.lottieLogo = new CompatibleAnimationView(CompatibleAnimation.Named("LottieLogo1"));
             this.lottieLogo.ContentMode = UIViewContentMode.ScaleAspectFill;
             this.lottieLogo.Frame = this.View.Bounds;
             this.lottieLogo.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-            this.lottieLogo.LoopAnimation = true;
+            this.lottieLogo.LoopAnimationCount = -1;
             this.View.AddSubview(this.lottieLogo);
         }
 

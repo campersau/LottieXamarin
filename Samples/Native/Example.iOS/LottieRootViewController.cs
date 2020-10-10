@@ -8,7 +8,7 @@ namespace LottieSamples.iOS
 {
     public partial class LottieRootViewController : UIViewController
     {
-        private LOTAnimationView lottieLogo;
+        private CompatibleAnimationView lottieLogo;
         private UIButton lottieButton;
         private UITableView tableView;
 
@@ -21,7 +21,7 @@ namespace LottieSamples.iOS
         {
             base.ViewDidLoad();
 
-            this.lottieLogo = LOTAnimationView.AnimationNamed("LottieLogo1");
+            this.lottieLogo = new CompatibleAnimationView(CompatibleAnimation.Named("LottieLogo1"));
             this.lottieLogo.ContentMode = UIViewContentMode.ScaleAspectFill;
             this.View.AddSubview(this.lottieLogo);
 
@@ -63,7 +63,7 @@ namespace LottieSamples.iOS
 
         private void PlayLottieAnimation()
         {
-            this.lottieLogo.AnimationProgress = 0;
+            this.lottieLogo.CurrentProgress = 0;
             this.lottieLogo.Play();
         }
 
