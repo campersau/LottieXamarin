@@ -9,7 +9,7 @@
     <IsBindingProject Condition=" '$(OS)' != 'Windows_NT' ">true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>2.5.12</Version>
+    <Version>3.1.18</Version>
   </PropertyGroup>
   
   <ItemGroup>
@@ -19,32 +19,28 @@
     
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-    <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
-    <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
-    <Compile Include="libLottie-ios.linkwith.cs">
-      <DependentUpon>libLottie-ios.a</DependentUpon>
-    </Compile>
+    <NativeReference Include="Lottie-ios.framework">
+      <Kind>Framework</Kind>
+    </NativeReference>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
-    <ObjcBindingNativeLibrary Include="libLottie-macos.a" />
-    <Compile Include="libLottie-macos.linkwith.cs">
-      <DependentUpon>libLottie-macos.a</DependentUpon>
-    </Compile>
+    <NativeReference Include="Lottie-macos.framework">
+      <Kind>Framework</Kind>
+    </NativeReference>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
-    <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
-    <Compile Include="libLottie-tvos.linkwith.cs">
-      <DependentUpon>libLottie-tvos.a</DependentUpon>
-    </Compile>
+    <NativeReference Include="Lottie-tvos.framework">
+      <Kind>Framework</Kind>
+    </NativeReference>
   </ItemGroup>
   
 </Project>

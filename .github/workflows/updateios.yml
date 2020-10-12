@@ -1,0 +1,93 @@
+name: Update iOS
+
+# https://www.npmjs.com/package/lottie-ios
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'lottie-ios ref'
+        required: true
+        default: 3.1.8
+
+jobs:
+  lottie-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          #repository: airbnb/lottie-ios
+          repository: campersau/lottie-ios
+          ref: ${{ github.event.inputs.ref }}
+
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
+      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
+      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvsimulator CONFIGURATION_BUILD_DIR=build/lottie-appletvsimulator
+
+      # - run: ls -la build/lottie-macos/Lottie.framework/Headers/
+
+      # - run: cp -R "build/lottie-iphoneos" "build/lottie-fat"
+      # - run: cp -R "build/lottie-iphonesimulator/Lottie.framework/Modules/Lottie.swiftmodule/" "build/lottie-fat/Lottie.framework/Modules/Lottie.swiftmodule/"
+      # - run: cp -R "build/lottie-macos/Lottie.framework/Modules/Lottie.swiftmodule/" "build/lottie-fat/Lottie.framework/Modules/Lottie.swiftmodule/"
+      # - run: cp -R "build/lottie-tvos/Lottie.framework/Modules/Lottie.swiftmodule/" "build/lottie-fat/Lottie.framework/Modules/Lottie.swiftmodule/"
+      # - run: cp -R "build/lottie-appletvsimulator/Lottie.framework/Modules/Lottie.swiftmodule/" "build/lottie-fat/Lottie.framework/Modules/Lottie.swiftmodule/"
+
+      #- run: lipo -create "build/lottie-fat/Lottie.framework/Lottie" -output "build/Lottie"
+      #     "build/lottie-iphoneos/Lottie.framework/Lottie" \
+      #     "build/lottie-iphonesimulator/Lottie.framework/Lottie" \
+      #     "build/lottie-macos/Lottie.framework/Lottie" \
+      #     "build/lottie-tvos/Lottie.framework/Lottie" \
+      #     "build/lottie-appletvsimulator/Lottie.framework/Lottie"
+
+      # - run: lipo -info "build/lottie-fat/Lottie.framework/Lottie"
+
+      - run: wget https://dl.xamarin.com/objective-sharpie/ObjectiveSharpie.pkg
+      - run: sudo installer -pkg "ObjectiveSharpie.pkg" -target /
+
+      - run: sharpie bind -output "build/lottie-iphoneos" -namespace "Airbnb.Lottie" -framework "build/lottie-iphoneos/Lottie.framework"
+      #- run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
+      - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
+
+      - run: mkdir Lottie-ios.framework && cp -R build/lottie-iphoneos/Lottie.framework/* Lottie-ios.framework
+      - run: mkdir Lottie-macos.framework && cp -R build/lottie-macos/Lottie.framework/* Lottie-macos.framework
+      - run: mkdir Lottie-tvos.framework && cp -R build/lottie-tvos/Lottie.framework/* Lottie-tvos.framework
+
+      - run: cp -R build/lottie-iphoneos/ApiDefinitions.cs ApiDefinitions.Ios.cs
+      #- run: cp -R build/lottie-macos/ApiDefinitions.cs ApiDefinitions.Mac.cs
+      - run: cp -R build/lottie-tvos/ApiDefinitions.cs ApiDefinitions.Tv.cs
+
+      - name: Upload lottie-ios
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-ios
+          path: |
+            Lottie-ios.framework
+            Lottie-macos.framework
+            Lottie-tvos.framework
+            ApiDefinitions.Ios.cs
+            ApiDefinitions.Tv.cs
+
+  pr:
+    runs-on: ubuntu-latest
+    needs: lottie-ios
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: rm -rf Lottie.iOS/Lottie-*.framework
+      - run: rm -rf Lottie.iOS/ApiDefinitions*.cs
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-ios
+          path: Lottie.iOS
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update lottie-ios to ${{ github.event.inputs.ref }}
+          title: Update lottie-ios to ${{ github.event.inputs.ref }}
+          labels: dependencies
+          branch: update-lottie-ios
+          branch-suffix: random

@@ -21,8 +21,8 @@ jobs:
 
       - run: ./gradlew assembleRelease androidJavadocsJar
 
-      - run: mv lottie/build/outputs/aar/lottie-release.aar lottie-${{ github.event.inputs.ref }}.aar
-      - run: mv lottie/build/libs/lottie-javadoc.jar lottie-${{ github.event.inputs.ref }}-sources.jar
+      - run: cp lottie/build/outputs/aar/lottie-release.aar lottie-${{ github.event.inputs.ref }}.aar
+      - run: cp lottie/build/libs/lottie-javadoc.jar lottie-${{ github.event.inputs.ref }}-sources.jar
 
       - name: Upload aar
         uses: actions/upload-artifact@v2
@@ -42,8 +42,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: rm Lottie.Android/Jars/*.aar
-      - run: rm Lottie.Android/JavaDocs/*.jar
+      - run: rm -rf Lottie.Android/Jars/*.aar
+      - run: rm -rf Lottie.Android/JavaDocs/*.jar
 
       - uses: actions/download-artifact@v2
         with:
