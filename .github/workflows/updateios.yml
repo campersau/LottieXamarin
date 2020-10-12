@@ -47,7 +47,8 @@ jobs:
       - run: sudo installer -pkg "ObjectiveSharpie.pkg" -target /
 
       - run: sharpie bind -output "build/lottie-iphoneos" -namespace "Airbnb.Lottie" -framework "build/lottie-iphoneos/Lottie.framework"
-      #- run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
+      - run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
+        continue-on-error: true
       - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
 
       - run: mkdir Lottie-ios.framework && cp -R build/lottie-iphoneos/Lottie.framework/* Lottie-ios.framework
@@ -55,7 +56,7 @@ jobs:
       - run: mkdir Lottie-tvos.framework && cp -R build/lottie-tvos/Lottie.framework/* Lottie-tvos.framework
 
       - run: cp -R build/lottie-iphoneos/ApiDefinitions.cs ApiDefinitions.Ios.cs
-      #- run: cp -R build/lottie-macos/ApiDefinitions.cs ApiDefinitions.Mac.cs
+      - run: cp -R build/lottie-macos/ApiDefinitions.cs ApiDefinitions.Mac.cs
       - run: cp -R build/lottie-tvos/ApiDefinitions.cs ApiDefinitions.Tv.cs
 
       - name: Upload lottie-ios
@@ -67,6 +68,7 @@ jobs:
             Lottie-macos.framework
             Lottie-tvos.framework
             ApiDefinitions.Ios.cs
+            ApiDefinitions.Mac.cs
             ApiDefinitions.Tv.cs
 
   pr:
