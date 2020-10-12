@@ -19,11 +19,14 @@ jobs:
           repository: airbnb/lottie-android
           ref: ${{ github.event.inputs.ref }}
 
+      # build lottie-android
       - run: ./gradlew assembleRelease androidJavadocsJar
 
+      # copy and rename libs
       - run: cp lottie/build/outputs/aar/lottie-release.aar lottie-${{ github.event.inputs.ref }}.aar
       - run: cp lottie/build/libs/lottie-javadoc.jar lottie-${{ github.event.inputs.ref }}-sources.jar
 
+      # upload libs
       - name: Upload aar
         uses: actions/upload-artifact@v2
         with:
@@ -42,9 +45,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # remove existing libs
       - run: rm -rf Lottie.Android/Jars/*.aar
       - run: rm -rf Lottie.Android/JavaDocs/*.jar
 
+      # download libs into their directories
       - uses: actions/download-artifact@v2
         with:
           name: lottie-aar
