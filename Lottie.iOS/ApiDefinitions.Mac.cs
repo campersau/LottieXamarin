@@ -1,29 +1,26 @@
 using System;
-using AppKit;
 using CoreAnimation;
-using CoreGraphics;
 using Foundation;
+using ObjCRuntime;
 
 namespace Airbnb.Lottie
 {
-	// @interface AnimationCompletionDelegate : NSObject <CAAnimationDelegate>
-	[BaseType (typeof(NSObject))]
+	// @interface AnimationCompletionDelegate
 	[DisableDefaultCtor]
-	interface AnimationCompletionDelegate : ICAAnimationDelegate
+	interface AnimationCompletionDelegate
 	{
-		// -(void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
+		// -(void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(id)flag;
 		[Export ("animationDidStop:finished:")]
-		void AnimationDidStop (CAAnimation anim, bool flag);
+		void AnimationDidStop (CAAnimation anim, NSObject flag);
 	}
 
-	// @interface AnimationContainer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface AnimationContainer
 	[DisableDefaultCtor]
 	interface AnimationContainer
 	{
-		// @property (nonatomic) CGFloat currentFrame;
+		// @property (nonatomic) int currentFrame;
 		[Export ("currentFrame")]
-		nfloat CurrentFrame { get; set; }
+		int CurrentFrame { get; set; }
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
 		[Export ("initWithLayer:")]
@@ -35,15 +32,15 @@ namespace Airbnb.Lottie
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// +(BOOL)needsDisplayForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result));
+		// +(id)needsDisplayForKey:(id)key __attribute__((warn_unused_result));
 		[Static]
 		[Export ("needsDisplayForKey:")]
-		bool NeedsDisplayForKey (string key);
+		NSObject NeedsDisplayForKey (NSObject key);
 
-		// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
+		// -(id<CAAction> _Nullable)actionForKey:(id)event __attribute__((warn_unused_result));
 		[Export ("actionForKey:")]
 		[return: NullAllowed]
-		CAAction ActionForKey (string @event);
+		CAAction ActionForKey (NSObject @event);
 
 		// -(void)display;
 		[Export ("display")]
@@ -53,10 +50,10 @@ namespace Airbnb.Lottie
 	// @interface AnimationSubview
 	interface AnimationSubview
 	{
-		// -(instancetype _Nonnull)initWithFrame:(NSRect)frameRect __attribute__((objc_designated_initializer));
+		// -(instancetype _Nonnull)initWithFrame:(id)frameRect __attribute__((objc_designated_initializer));
 		[Export ("initWithFrame:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (CGRect frameRect);
+		IntPtr Constructor (NSObject frameRect);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
 		[Export ("initWithCoder:")]
@@ -71,13 +68,13 @@ namespace Airbnb.Lottie
 		[Export ("viewDidMoveToWindow")]
 		void ViewDidMoveToWindow ();
 
-		// @property (readonly, nonatomic) BOOL wantsUpdateLayer;
+		// @property (readonly, nonatomic) int wantsUpdateLayer;
 		[Export ("wantsUpdateLayer")]
-		bool WantsUpdateLayer { get; }
+		int WantsUpdateLayer { get; }
 
-		// @property (readonly, getter = isFlipped, nonatomic) BOOL flipped;
+		// @property (readonly, getter = isFlipped, nonatomic) int flipped;
 		[Export ("flipped")]
-		bool Flipped { [Bind ("isFlipped")] get; }
+		int Flipped { [Bind ("isFlipped")] get; }
 
 		// -(void)layout;
 		[Export ("layout")]
@@ -91,10 +88,10 @@ namespace Airbnb.Lottie
 		[Export ("animationWillEnterForeground")]
 		void AnimationWillEnterForeground ();
 
-		// -(instancetype _Nonnull)initWithFrame:(NSRect)frameRect __attribute__((objc_designated_initializer));
+		// -(instancetype _Nonnull)initWithFrame:(id)frameRect __attribute__((objc_designated_initializer));
 		[Export ("initWithFrame:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (CGRect frameRect);
+		IntPtr Constructor (NSObject frameRect);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
 		[Export ("initWithCoder:")]
@@ -106,23 +103,23 @@ namespace Airbnb.Lottie
 	[BaseType (typeof(LottieView))]
 	interface AnimationView
 	{
-		// @property (copy, nonatomic) NSString * _Nullable animationName;
-		[NullAllowed, Export ("animationName")]
-		string AnimationName { get; set; }
+		// @property (copy, nonatomic) int * _Nullable animationName;
+		[NullAllowed, Export ("animationName", ArgumentSemantic.Copy)]
+		unsafe int* AnimationName { get; set; }
 
-		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
+		// -(instancetype _Nonnull)initWithFrame:(id)frame __attribute__((objc_designated_initializer));
 		[Export ("initWithFrame:")]
 		[DesignatedInitializer]
-		IntPtr Constructor (CGRect frame);
+		IntPtr Constructor (NSObject frame);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
 		[Export ("initWithCoder:")]
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// @property (readonly, nonatomic) CGSize intrinsicContentSize;
+		// @property (readonly, nonatomic) int intrinsicContentSize;
 		[Export ("intrinsicContentSize")]
-		CGSize IntrinsicContentSize { get; }
+		int IntrinsicContentSize { get; }
 
 		// -(void)animationWillMoveToBackground;
 		[Export ("animationWillMoveToBackground")]
@@ -133,8 +130,7 @@ namespace Airbnb.Lottie
 		void AnimationWillEnterForeground ();
 	}
 
-	// @interface CompositionLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface CompositionLayer
 	[DisableDefaultCtor]
 	interface CompositionLayer
 	{
@@ -149,8 +145,7 @@ namespace Airbnb.Lottie
 		IntPtr Constructor (NSCoder aDecoder);
 	}
 
-	// @interface DebugLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface DebugLayer
 	[DisableDefaultCtor]
 	interface DebugLayer
 	{
@@ -175,8 +170,7 @@ namespace Airbnb.Lottie
 		IntPtr Constructor (NSCoder aDecoder);
 	}
 
-	// @interface InvertedMatteLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface InvertedMatteLayer
 	[DisableDefaultCtor]
 	interface InvertedMatteLayer
 	{
@@ -190,13 +184,12 @@ namespace Airbnb.Lottie
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(id)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		void DrawInContext (NSObject ctx);
 	}
 
-	// @interface MaskContainerLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface MaskContainerLayer
 	[DisableDefaultCtor]
 	interface MaskContainerLayer
 	{
@@ -211,14 +204,18 @@ namespace Airbnb.Lottie
 		IntPtr Constructor (NSCoder aDecoder);
 	}
 
-	// @interface Lottie_Swift_335 (NSImage)
-	[Category]
-	[BaseType (typeof(NSImage))]
-	interface NSImage_Lottie_Swift_335
+	// @interface Lottie_Swift_335
+	interface Lottie_Swift_335
 	{
-		// @property (readonly, nonatomic) CGImageRef _Nullable CGImage;
-		[NullAllowed, Export ("CGImage")]
-		unsafe CGImageRef* CGImage { }
+	}
+
+	[Static]
+	[Verify (ConstantsInterfaceAssociation)]
+	partial interface Constants
+	{
+		// extern int CGImage;
+		[Field ("CGImage")]
+		int CGImage { get; }
 	}
 
 	// @interface NullCompositionLayer : CompositionLayer
@@ -266,8 +263,7 @@ namespace Airbnb.Lottie
 		IntPtr Constructor (NSCoder aDecoder);
 	}
 
-	// @interface ShapeContainerLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface ShapeContainerLayer
 	interface ShapeContainerLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -296,9 +292,9 @@ namespace Airbnb.Lottie
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(id)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		void DrawInContext (NSObject ctx);
 	}
 
 	// @interface SolidCompositionLayer : CompositionLayer
@@ -331,18 +327,17 @@ namespace Airbnb.Lottie
 		IntPtr Constructor (NSObject layer);
 	}
 
-	// @interface TextLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	// @interface TextLayer
 	interface TextLayer
 	{
-		// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
+		// -(id<CAAction> _Nullable)actionForKey:(id)event __attribute__((warn_unused_result));
 		[Export ("actionForKey:")]
 		[return: NullAllowed]
-		CAAction ActionForKey (string @event);
+		CAAction ActionForKey (NSObject @event);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(id)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		void DrawInContext (NSObject ctx);
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
 		[Export ("initWithLayer:")]
