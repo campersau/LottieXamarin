@@ -190,9 +190,9 @@ namespace Airbnb.Lottie
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(CGContext _Nonnull)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		unsafe void DrawInContext (CGContext* ctx);
 	}
 
 	// @interface MaskContainerLayer : CALayer
@@ -296,9 +296,9 @@ namespace Airbnb.Lottie
 		[DesignatedInitializer]
 		IntPtr Constructor (NSCoder aDecoder);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(CGContext _Nonnull)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		unsafe void DrawInContext (CGContext* ctx);
 	}
 
 	// @interface SolidCompositionLayer : CompositionLayer
@@ -340,9 +340,9 @@ namespace Airbnb.Lottie
 		[return: NullAllowed]
 		CAAction ActionForKey (string @event);
 
-		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		// -(void)drawInContext:(CGContext _Nonnull)ctx;
 		[Export ("drawInContext:")]
-		unsafe void DrawInContext (CGContextRef* ctx);
+		unsafe void DrawInContext (CGContext* ctx);
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
 		[Export ("initWithLayer:")]
