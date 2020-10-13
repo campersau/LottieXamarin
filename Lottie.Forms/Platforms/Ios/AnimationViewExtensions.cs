@@ -7,38 +7,38 @@ namespace Lottie.Forms.Platforms.Ios
 {
     public static class AnimationViewExtensions
     {
-        public static LOTComposition GetAnimation(this AnimationView animationView)
+        public static CompatibleAnimation GetAnimation(this AnimationView animationView)
         {
             if (animationView == null)
                 throw new ArgumentNullException(nameof(animationView));
 
             var animation = animationView.Animation;
 
-            LOTComposition composition = null;
+            CompatibleAnimation composition = null;
             switch (animationView.AnimationSource)
             {
                 case AnimationSource.AssetOrBundle:
                     if (animation is string bundleAnimation)
                     {
-                        if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
-                            composition = LOTComposition.AnimationNamed(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
-                        else
-                            composition = LOTComposition.AnimationNamed(bundleAnimation);
+                        //if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
+                        //    composition = CompatibleAnimation.Named(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
+                        //else
+                            composition = CompatibleAnimation.Named(bundleAnimation);
                     }
                     break;
                 case AnimationSource.Url:
                     if (animation is string stringAnimation)
-                        composition = LOTComposition.AnimationNamed(stringAnimation);
+                        composition = CompatibleAnimation.Named(stringAnimation);
                     break;
                 case AnimationSource.Json:
-                    if (animation is string jsonAnimation)
-                    {
-                        NSData objectData = NSData.FromString(jsonAnimation);
-                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
-                        composition = LOTComposition.AnimationFromJSON(jsonData);
-                    }
-                    else if (animation is NSDictionary dictAnimation)
-                        composition = LOTComposition.AnimationFromJSON(dictAnimation);
+                    //if (animation is string jsonAnimation)
+                    //{
+                    //    NSData objectData = NSData.FromString(jsonAnimation);
+                    //    NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
+                    //    composition = CompatibleAnimation.AnimationFromJSON(jsonData);
+                    //}
+                    //else if (animation is NSDictionary dictAnimation)
+                    //    composition = CompatibleAnimation.AnimationFromJSON(dictAnimation);
                     break;
                 case AnimationSource.Stream:
                     composition = animationView.GetAnimation(animation);
@@ -52,12 +52,12 @@ namespace Lottie.Forms.Platforms.Ios
             return composition;
         }
 
-        public static LOTComposition GetAnimation(this AnimationView animationView, object animation)
+        public static CompatibleAnimation GetAnimation(this AnimationView animationView, object animation)
         {
             if (animationView == null)
                 throw new ArgumentNullException(nameof(animationView));
 
-            LOTComposition composition = null;
+            CompatibleAnimation composition = null;
             switch (animation)
             {
                 case string stringAnimation:
@@ -67,16 +67,16 @@ namespace Lottie.Forms.Platforms.Ios
                     //TODO: check if url
                     //animationView.SetAnimationFromUrl(stringAnimation);
 
-                    composition = LOTComposition.AnimationNamed(stringAnimation);
+                    composition = CompatibleAnimation.Named(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    using (StreamReader reader = new StreamReader(streamAnimation))
-                    {
-                        string json = reader.ReadToEnd();
-                        NSData objectData = NSData.FromString(json);
-                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
-                        composition = LOTComposition.AnimationFromJSON(jsonData);
-                    }
+                    //using (StreamReader reader = new StreamReader(streamAnimation))
+                    //{
+                    //    string json = reader.ReadToEnd();
+                    //    NSData objectData = NSData.FromString(json);
+                    //    NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
+                    //    composition = LOTComposition.AnimationFromJSON(jsonData);
+                    //}
                     break;
                 case null:
                     composition = null;

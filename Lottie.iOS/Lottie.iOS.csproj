@@ -24,22 +24,25 @@
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
-    <NativeReference Include="Lottie-ios.framework">
+    <NativeReference Include="lottie-ios/Lottie.framework">
       <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
-    <NativeReference Include="Lottie-macos.framework">
+    <NativeReference Include="lottie-macos/Lottie.framework">
       <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
-    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
-    <NativeReference Include="Lottie-tvos.framework">
+    <ObjcBindingApiDefinition Include="ApiDefinitions.Tv.cs" />
+    <NativeReference Include="lottie-tvos/Lottie.framework">
       <Kind>Framework</Kind>
+      <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
   

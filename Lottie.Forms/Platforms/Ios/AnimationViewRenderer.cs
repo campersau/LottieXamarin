@@ -7,18 +7,17 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer)), Xamarin.Forms.Internals.Preserve(AllMembers = true)]
+[assembly: ExportRenderer(typeof(Lottie.Forms.AnimationView), typeof(AnimationViewRenderer)), Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 
 namespace Lottie.Forms.Platforms.Ios
 {
-    public class AnimationViewRenderer : ViewRenderer<AnimationView, LOTAnimationView>
+    public class AnimationViewRenderer : ViewRenderer<Lottie.Forms.AnimationView, Airbnb.Lottie.CompatibleAnimationView>
     {
-        private LOTAnimationCompletionBlock _animationCompletionBlock;
-        private LOTAnimationView _animationView;
+        private CompatibleAnimationView _animationView;
         private UITapGestureRecognizer _gestureRecognizer;
         private int repeatCount = 1;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Lottie.Forms.AnimationView> e)
         {
             base.OnElementChanged(e);
 
@@ -34,20 +33,17 @@ namespace Lottie.Forms.Platforms.Ios
             {
                 if (Control == null)
                 {
-                    _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
-
-                    _animationView = new LOTAnimationView()
+                    _animationView = new CompatibleAnimationView()
                     {
                         AutoresizingMask = UIViewAutoresizing.All,
                         ContentMode = UIViewContentMode.ScaleAspectFit,
-                        LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite,
+                        //LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite,
                         AnimationSpeed = e.NewElement.Speed,
-                        AnimationProgress = e.NewElement.Progress,
-                        CacheEnable = e.NewElement.CacheComposition,
-                        CompletionBlock = _animationCompletionBlock
+                        CurrentProgress = e.NewElement.Progress,
+                        //CompletionBlock = _animationCompletionBlock
                     };
 
-                    _animationView.SceneModel = e.NewElement.GetAnimation();
+                    _animationView.CompatibleAnimation = e.NewElement.GetAnimation();
 
                     e.NewElement.PlayCommand = new Command(() =>
                     {
@@ -78,16 +74,16 @@ namespace Lottie.Forms.Platforms.Ios
                     e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
-                            _animationView.PlayFromFrame(NSNumber.FromInt32(minFrame), NSNumber.FromInt32(maxFrame), AnimationCompletionBlock);
+                            _animationView.PlayFromFrame(minFrame, maxFrame, AnimationCompletionBlock);
                     });
                     e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
                         if (paramter is (float minProgress, float maxProgress))
                             _animationView.PlayFromProgress(minProgress, maxProgress, AnimationCompletionBlock);
                     });
-                    e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.AutoReverseAnimation = !_animationView.AutoReverseAnimation);
+                    //e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.AutoReverseAnimation = !_animationView.AutoReverseAnimation);
 
-                    _animationView.CacheEnable = e.NewElement.CacheComposition;
+                    //_animationView.CacheEnable = e.NewElement.CacheComposition;
                     //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
                     //_animationView.Composition = e.NewElement.Composition;
 
@@ -98,13 +94,13 @@ namespace Lottie.Forms.Platforms.Ios
                     //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
 
                     _animationView.AnimationSpeed = e.NewElement.Speed;
-                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite;
+                    //_animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite;
                     //_animationView.RepeatCount = e.NewElement.RepeatCount;
                     //if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                     //    _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
                     _animationView.ContentScaleFactor = e.NewElement.Scale;
                     //_animationView.Frame = e.NewElement.Frame;
-                    _animationView.AnimationProgress = e.NewElement.Progress;
+                    _animationView.CurrentProgress = e.NewElement.Progress;
 
                     _gestureRecognizer = new UITapGestureRecognizer(e.NewElement.InvokeClick);
                     _animationView.AddGestureRecognizer(_gestureRecognizer);
@@ -128,14 +124,14 @@ namespace Lottie.Forms.Platforms.Ios
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 //CleanupResources();
-                _animationView.SceneModel = Element.GetAnimation();
+                _animationView.CompatibleAnimation = Element.GetAnimation();
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayWithCompletion(AnimationCompletionBlock);
             }
 
-            if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
-                _animationView.CacheEnable = Element.CacheComposition;
+            //if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
+            //    _animationView.CacheEnable = Element.CacheComposition;
 
             //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
             //_animationView.Composition = e.NewElement.Composition;
@@ -155,8 +151,8 @@ namespace Lottie.Forms.Platforms.Ios
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
                 _animationView.AnimationSpeed = Element.Speed;
 
-            if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
-                _animationView.LoopAnimation = Element.RepeatMode == RepeatMode.Infinite;
+            //if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
+            //    _animationView.LoopAnimation = Element.RepeatMode == RepeatMode.Infinite;
 
             //if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
             //    _animationView.RepeatCount = Element.RepeatCount;
@@ -171,7 +167,7 @@ namespace Lottie.Forms.Platforms.Ios
             //    _animationView.Frame = Element.Frame;
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-                _animationView.AnimationProgress = Element.Progress;
+                _animationView.CurrentProgress = Element.Progress;
 
             base.OnElementPropertyChanged(sender, e);
         }
