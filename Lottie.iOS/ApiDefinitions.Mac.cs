@@ -218,7 +218,7 @@ namespace Airbnb.Lottie
 	{
 		// @property (readonly, nonatomic) CGImageRef _Nullable CGImage;
 		[NullAllowed, Export ("CGImage")]
-		unsafe CGImageRef* CGImage { }
+		unsafe CGImage CGImage { }
 	}
 
 	// @interface NullCompositionLayer : CompositionLayer
