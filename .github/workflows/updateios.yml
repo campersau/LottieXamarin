@@ -21,7 +21,7 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
 
       # build lottie-ios for different platforms
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-ios
       # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
@@ -32,13 +32,13 @@ jobs:
       - run: sudo installer -pkg "ObjectiveSharpie.pkg" -target /
 
       # create bindings from headers
-      - run: sharpie bind -output "build/lottie-iphoneos" -namespace "Airbnb.Lottie" -framework "build/lottie-iphoneos/Lottie.framework"
+      - run: sharpie bind -output "build/lottie-ios" -namespace "Airbnb.Lottie" -framework "build/lottie-ios/Lottie.framework"
       - run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
         continue-on-error: true
       - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
 
       # move and rename bindings
-      - run: mv build/lottie-iphoneos/ApiDefinitions.cs build/ApiDefinitions.Ios.cs
+      - run: mv build/lottie-ios/ApiDefinitions.cs build/ApiDefinitions.Ios.cs
       - run: mv build/lottie-macos/ApiDefinitions.cs build/ApiDefinitions.Mac.cs
       - run: mv build/lottie-tvos/ApiDefinitions.cs build/ApiDefinitions.Tv.cs
 
