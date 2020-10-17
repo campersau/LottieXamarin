@@ -55,9 +55,9 @@ jobs:
       ## rename "CGImageRef*" to "CGImage"
       - run: sed -i '' -e 's.CGImageRef\*.CGImage.g' ApiDefinitions*.cs
       ## comment out constructors
-      - run: sed -i '' -e 's.\[DesignatedInitializer\].//[DesignatedInitializer].g' ApiDefinitions*.cs
-      - run: sed -i '' -e 's.\[Export ("init.//[Export ("init.g' ApiDefinitions*.cs
-      - run: sed -i '' -e 's.IntPtr Constructor.//IntPtr Constructor.g' ApiDefinitions*.cs
+      - run: sed -i '' -e 's.\[Export ("initWithCoder./*[Export ("initWithCoder.g' ApiDefinitions*.cs
+      - run: sed -i '' -e 's.IntPtr Constructor (NSCoder aDecoder);.IntPtr Constructor (NSCoder aDecoder);*/.g' ApiDefinitions*.cs
+      - run: sed -i '' -e 's.IntPtr Constructor (NSCoder coder);.IntPtr Constructor (NSCoder coder);*/.g' ApiDefinitions*.cs
 
       # upload frameworks / bindings
       - name: Upload lottie-ios
