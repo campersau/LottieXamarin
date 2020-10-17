@@ -9,7 +9,7 @@ using UIKit;
 namespace Airbnb.Lottie
 {
 	// @interface AnimatedControl : UIControl
-	[BaseType (typeof(UIControl))]
+	[BaseType (typeof(UIControl), Name = "_TtC6Lottie15AnimatedControl")]
 	interface AnimatedControl
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -51,7 +51,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimatedButton : AnimatedControl
-	[BaseType (typeof(AnimatedControl))]
+	[BaseType (typeof(AnimatedControl), Name = "_TtC6Lottie14AnimatedButton")]
 	interface AnimatedButton
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -69,7 +69,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimatedSwitch : AnimatedControl
-	[BaseType (typeof(AnimatedControl))]
+	[BaseType (typeof(AnimatedControl), Name = "_TtC6Lottie14AnimatedSwitch")]
 	interface AnimatedSwitch
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -83,7 +83,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimationCompletionDelegate : NSObject <CAAnimationDelegate>
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof(NSObject), Name = "_TtC6Lottie27AnimationCompletionDelegate")]
 	[DisableDefaultCtor]
 	interface AnimationCompletionDelegate : ICAAnimationDelegate
 	{
@@ -93,7 +93,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimationContainer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18AnimationContainer")]
 	[DisableDefaultCtor]
 	interface AnimationContainer
 	{
@@ -127,7 +127,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimationSubview : UIView
-	[BaseType (typeof(UIView))]
+	[BaseType (typeof(UIView), Name = "_TtC6Lottie16AnimationSubview")]
 	interface AnimationSubview
 	{
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
@@ -142,7 +142,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface LottieView : UIView
-	[BaseType (typeof(UIView))]
+	[BaseType (typeof(UIView), Name = "_TtC6Lottie10LottieView")]
 	interface LottieView
 	{
 		// -(void)didMoveToWindow;
@@ -177,7 +177,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimationView : LottieView
-	[BaseType (typeof(LottieView))]
+	[BaseType (typeof(LottieView), Name = "_TtC6Lottie13AnimationView")]
 	interface AnimationView
 	{
 		// @property (copy, nonatomic) NSString * _Nullable animationName;
@@ -208,7 +208,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface CompatibleAnimation : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof(NSObject), Name = "_TtC6Lottie19CompatibleAnimation")]
 	[DisableDefaultCtor]
 	interface CompatibleAnimation
 	{
@@ -224,7 +224,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface CompatibleAnimationKeypath : NSObject
-	[BaseType (typeof(NSObject))]
+	[BaseType (typeof(NSObject), Name = "_TtC6Lottie26CompatibleAnimationKeypath")]
 	[DisableDefaultCtor]
 	interface CompatibleAnimationKeypath
 	{
@@ -240,7 +240,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface CompatibleAnimationView : UIView
-	[BaseType (typeof(UIView))]
+	[BaseType (typeof(UIView), Name = "_TtC6Lottie23CompatibleAnimationView")]
 	interface CompatibleAnimationView
 	{
 		// -(instancetype _Nonnull)initWithCompatibleAnimation:(CompatibleAnimation * _Nonnull)compatibleAnimation __attribute__((objc_designated_initializer));
@@ -378,7 +378,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface CompositionLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie16CompositionLayer")]
 	[DisableDefaultCtor]
 	interface CompositionLayer
 	{
@@ -394,7 +394,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface DebugLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie10DebugLayer")]
 	[DisableDefaultCtor]
 	interface DebugLayer
 	{
@@ -405,7 +405,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface ImageCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ImageCompositionLayer")]
 	interface ImageCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
@@ -420,7 +420,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface InvertedMatteLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18InvertedMatteLayer")]
 	[DisableDefaultCtor]
 	interface InvertedMatteLayer
 	{
@@ -440,7 +440,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface MaskContainerLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18MaskContainerLayer")]
 	[DisableDefaultCtor]
 	interface MaskContainerLayer
 	{
@@ -456,7 +456,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface NullCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20NullCompositionLayer")]
 	interface NullCompositionLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -471,7 +471,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface PreCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie19PreCompositionLayer")]
 	interface PreCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
@@ -486,7 +486,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface ShapeCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ShapeCompositionLayer")]
 	interface ShapeCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
@@ -501,7 +501,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface ShapeContainerLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie19ShapeContainerLayer")]
 	interface ShapeContainerLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -516,7 +516,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface ShapeRenderLayer : ShapeContainerLayer
-	[BaseType (typeof(ShapeContainerLayer))]
+	[BaseType (typeof(ShapeContainerLayer), Name = "_TtC6Lottie16ShapeRenderLayer")]
 	[DisableDefaultCtor]
 	interface ShapeRenderLayer
 	{
@@ -536,7 +536,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface SolidCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21SolidCompositionLayer")]
 	interface SolidCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
@@ -551,7 +551,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface TextCompositionLayer : CompositionLayer
-	[BaseType (typeof(CompositionLayer))]
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20TextCompositionLayer")]
 	interface TextCompositionLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
@@ -566,7 +566,7 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface TextLayer : CALayer
-	[BaseType (typeof(CALayer))]
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie9TextLayer")]
 	interface TextLayer
 	{
 		// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
