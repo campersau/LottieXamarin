@@ -21,7 +21,7 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
 
       # build lottie-ios for different platforms
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-ios
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
       # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
@@ -32,43 +32,87 @@ jobs:
       - run: sudo installer -pkg "ObjectiveSharpie.pkg" -target /
 
       # create bindings from headers
-      - run: sharpie bind -output "build/lottie-ios" -namespace "Airbnb.Lottie" -framework "build/lottie-ios/Lottie.framework"
+      - run: sharpie bind -output "build/lottie-iphoneos" -namespace "Airbnb.Lottie" -framework "build/lottie-iphoneos/Lottie.framework"
       - run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
         continue-on-error: true
       - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
 
-      # move and rename bindings
-      - run: mv build/lottie-ios/ApiDefinitions.cs build/ApiDefinitions.Ios.cs
-      - run: mv build/lottie-macos/ApiDefinitions.cs build/ApiDefinitions.Mac.cs
-      - run: mv build/lottie-tvos/ApiDefinitions.cs build/ApiDefinitions.Tv.cs
+      # copy and rename frameworks
+      - run: mkdir Lottie-ios.framework && cp -R build/lottie-iphoneos/Lottie.framework/* Lottie-ios.framework
+      - run: mkdir Lottie-macos.framework && cp -R build/lottie-macos/Lottie.framework/* Lottie-macos.framework
+      - run: mkdir Lottie-tvos.framework && cp -R build/lottie-tvos/Lottie.framework/* Lottie-tvos.framework
+
+      # copy and rename bindings
+      - run: mv build/lottie-iphoneos/ApiDefinitions.cs ApiDefinitions.Ios.cs
+      - run: mv build/lottie-macos/ApiDefinitions.cs ApiDefinitions.Mac.cs
+      - run: mv build/lottie-tvos/ApiDefinitions.cs ApiDefinitions.Tv.cs
 
       # fix some known issues
       ## comment out "using Lottie;"
-      - run: sed -i '' -e 's.using Lottie;.//using Lottie;.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.using Lottie;.//using Lottie;.g' ApiDefinitions*.cs
       ## rename "CGContextRef*" to "CGContext"
-      - run: sed -i '' -e 's.CGContextRef\*.CGContext.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.CGContextRef\*.CGContext.g' ApiDefinitions*.cs
       ## rename "CGImageRef*" to "CGImage"
-      - run: sed -i '' -e 's.CGImageRef\*.CGImage.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.CGImageRef\*.CGImage.g' ApiDefinitions*.cs
       ## comment out constructors
-      - run: sed -i '' -e 's.\[DesignatedInitializer\].//[DesignatedInitializer].g' build/ApiDefinitions*.cs
-      - run: sed -i '' -e 's.\[Export ("init.//[Export ("init.g' build/ApiDefinitions*.cs
-      - run: sed -i '' -e 's.IntPtr Constructor.//IntPtr Constructor.g' build/ApiDefinitions*.cs
+      - run: sed -i '' -e 's.\[DesignatedInitializer\].//[DesignatedInitializer].g' ApiDefinitions*.cs
+      - run: sed -i '' -e 's.\[Export ("init.//[Export ("init.g' ApiDefinitions*.cs
+      - run: sed -i '' -e 's.IntPtr Constructor.//IntPtr Constructor.g' ApiDefinitions*.cs
 
       # upload frameworks / bindings
       - name: Upload lottie-ios
         uses: actions/upload-artifact@v2
         with:
           name: lottie-ios
-          path: build/*
+          path: |
+            Lottie-ios.framework
+            Lottie-macos.framework
+            Lottie-tvos.framework
+            ApiDefinitions.Ios.cs
+            ApiDefinitions.Mac.cs
+            ApiDefinitions.Tv.cs
+
+  swiftclassify:
+    runs-on: windows-latest
+    needs: lottie-ios
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: Flash3001/SwiftClassify
+          ref: master
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - run: msbuild /p:Configuration=Release SwiftClassify.sln
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: lottie-ios
+
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe Lottie-ios.framework/Headers/Lottie-Swift.h ApiDefinitions.Ios.cs
+
+      # upload frameworks / bindings
+      - name: Upload lottie-ios
+        uses: actions/upload-artifact@v2
+        with:
+          name: lottie-ios
+          path: |
+            Lottie-ios.framework
+            Lottie-macos.framework
+            Lottie-tvos.framework
+            ApiDefinitions.Ios.cs
+            ApiDefinitions.Mac.cs
+            ApiDefinitions.Tv.cs
 
   pr:
     runs-on: ubuntu-latest
-    needs: lottie-ios
+    needs: swiftclassify
     steps:
       - uses: actions/checkout@v2
 
       # remove existing frameworks / bindings
-      - run: rm -rf Lottie.iOS/**/Lottie-*.framework
+      - run: rm -rf Lottie.iOS/Lottie-*.framework
       - run: rm -rf Lottie.iOS/ApiDefinitions*.cs
 
       # remove frameworks / bindings into their folder
