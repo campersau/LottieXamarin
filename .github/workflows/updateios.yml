@@ -20,10 +20,18 @@ jobs:
           repository: campersau/lottie-ios
           ref: ${{ github.event.inputs.ref }}
 
+      # install macos10.10 sdk
+      - run: wget https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.10.sdk.tar.xz
+      - run: sudo tar -zxf MacOSX10.10.sdk.tar.xz -C /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+      - run: sudo plutil -replace MinimumSDKVersion -string 10.10 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Info.plist
+      - run: export SDKROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/
+
+      - run: xcodebuild -showsdks
+
       # build lottie-ios for different platforms
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
+      #- run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
       # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx10.10 CONFIGURATION_BUILD_DIR=build/lottie-macos
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
       # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvsimulator CONFIGURATION_BUILD_DIR=build/lottie-appletvsimulator
 
@@ -90,7 +98,16 @@ jobs:
         with:
           name: lottie-ios
 
+      # add generated swift names
       - run: ./SwiftClassify/bin/Release/SwiftClassify.exe Lottie-ios.framework/Headers/Lottie-Swift.h ApiDefinitions.Ios.cs
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe Lottie-macos.framework/Headers/Lottie-Swift.h ApiDefinitions.Mac.cs
+      - run: ./SwiftClassify/bin/Release/SwiftClassify.exe Lottie-tvos.framework/Headers/Lottie-Swift.h ApiDefinitions.Tv.cs
+
+      # rename files...
+      - run: Move-Item -Force -Path ApiDefinitions.IosNew.cs -Destination ApiDefinitions.Ios.cs
+      - run: Move-Item -Force -Path ApiDefinitions.MacNew.cs -Destination ApiDefinitions.Mac.cs
+        continue-on-error: true
+      - run: Move-Item -Force -Path ApiDefinitions.TvNew.cs -Destination ApiDefinitions.Tv.cs
 
       # upload frameworks / bindings
       - name: Upload lottie-ios
