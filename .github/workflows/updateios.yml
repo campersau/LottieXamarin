@@ -92,6 +92,9 @@ jobs:
 
       - run: ./SwiftClassify/bin/Release/SwiftClassify.exe Lottie-ios.framework/Headers/Lottie-Swift.h ApiDefinitions.Ios.cs
 
+      # rename files...
+      - run: Move-Item -Force -Path ApiDefinitions.IosNew.cs -Destination ApiDefinitions.Ios.cs
+
       # upload frameworks / bindings
       - name: Upload lottie-ios
         uses: actions/upload-artifact@v2
