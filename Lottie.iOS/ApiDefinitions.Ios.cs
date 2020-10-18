@@ -217,6 +217,11 @@ namespace Airbnb.Lottie
 		[Export ("named:")]
 		CompatibleAnimation Named (string name);
 
+		// +(CompatibleAnimation * _Nonnull)animationFromJSON:(NSDictionary * _Nonnull)animationJSON __attribute__((warn_unused_result));
+		[Static]
+		[Export ("animationFromJSON:")]
+		CompatibleAnimation AnimationFromJSON (NSDictionary animationJSON);
+
 		// -(instancetype _Nonnull)initWithName:(NSString * _Nonnull)name bundle:(NSBundle * _Nonnull)bundle __attribute__((objc_designated_initializer));
 		[Export ("initWithName:bundle:")]
 		[DesignatedInitializer]
