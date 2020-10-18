@@ -11,7 +11,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace Lottie.Forms.Platforms.Ios
 {
-    public class AnimationViewRenderer : ViewRenderer<Lottie.Forms.AnimationView, Airbnb.Lottie.CompatibleAnimationView>
+    public class AnimationViewRenderer : ViewRenderer<Lottie.Forms.AnimationView, CompatibleAnimationView>
     {
         private CompatibleAnimationView _animationView;
         private UITapGestureRecognizer _gestureRecognizer;

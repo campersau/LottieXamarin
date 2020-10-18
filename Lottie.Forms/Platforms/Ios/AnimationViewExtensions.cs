@@ -20,9 +20,9 @@ namespace Lottie.Forms.Platforms.Ios
                 case AnimationSource.AssetOrBundle:
                     if (animation is string bundleAnimation)
                     {
-                        //if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
-                        //    composition = CompatibleAnimation.Named(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
-                        //else
+                        if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
+                            composition = new CompatibleAnimation(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
+                        else
                             composition = CompatibleAnimation.Named(bundleAnimation);
                     }
                     break;
