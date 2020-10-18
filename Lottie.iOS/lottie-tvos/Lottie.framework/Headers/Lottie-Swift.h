@@ -373,6 +373,7 @@ SWIFT_CLASS("_TtC6Lottie23CompatibleAnimationView")
 @property (nonatomic, readonly) CGFloat realtimeAnimationProgress;
 @property (nonatomic) CGFloat animationSpeed;
 @property (nonatomic) BOOL respectAnimationFrameRate;
+@property (nonatomic, readonly) BOOL isAnimationPlaying;
 - (void)play;
 - (void)playWithCompletion:(void (^ _Nullable)(BOOL))completion;
 - (void)playFromProgress:(CGFloat)fromProgress toProgress:(CGFloat)toProgress completion:(void (^ _Nullable)(BOOL))completion;

@@ -302,6 +302,10 @@ namespace Airbnb.Lottie
 		[Export ("respectAnimationFrameRate")]
 		bool RespectAnimationFrameRate { get; set; }
 
+		// @property (readonly, nonatomic) BOOL isAnimationPlaying;
+		[Export ("isAnimationPlaying")]
+		bool IsAnimationPlaying { get; }
+
 		// -(void)play;
 		[Export ("play")]
 		void Play ();
