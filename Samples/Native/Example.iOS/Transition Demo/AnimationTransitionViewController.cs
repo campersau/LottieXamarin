@@ -85,29 +85,31 @@ namespace LottieSamples.iOS
         [Export("animationControllerForPresentedController:presentingController:sourceController:")]
         public IUIViewControllerAnimatedTransitioning GetAnimationControllerForPresentedController(UIViewController presented, UIViewController presenting, UIViewController source)
         {
-            LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
-                animation: "vcTransition1",
-                fromLayer: "outLayer",
-                toLayer: "inLayer",
-                applyAnimationTransform: false
-            );
+            //LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
+            //    animation: "vcTransition1",
+            //    fromLayer: "outLayer",
+            //    toLayer: "inLayer",
+            //    applyAnimationTransform: false
+            //);
 
-            return animationController;
+            //return animationController;
+            return null;
         }
 
 
         [Export("animationControllerForDismissedController:")]
         public IUIViewControllerAnimatedTransitioning GetAnimationControllerForDismissedController(UIViewController dismissed)
         {
-            LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
-               animation: "vcTransition2",
-               fromLayer: "outLayer",
-               toLayer: "inLayer",
-               applyAnimationTransform: false
-            );
+            //LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
+            //   animation: "vcTransition2",
+            //   fromLayer: "outLayer",
+            //   toLayer: "inLayer",
+            //   applyAnimationTransform: false
+            //);
 
 
-            return animationController;
+            //return animationController;
+            return null;
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace LottieSamples.iOS
     public class LOTCharacterCell : UICollectionViewCell
     {
 
-        private LOTAnimationView animationView;
+        private CompatibleAnimationView animationView;
         private string character;
 
 
@@ -85,7 +85,7 @@ namespace LottieSamples.iOS
 
 
             this.character = sanatizedChar;
-            this.animationView = LOTAnimationView.AnimationNamed("TypeFace/" + sanatizedChar);
+            this.animationView = new CompatibleAnimationView(CompatibleAnimation.Named("TypeFace/" + sanatizedChar));
             this.animationView.ContentMode = UIViewContentMode.ScaleAspectFit;
             this.ContentView.AddSubview(this.animationView);
             CGRect c = this.ContentView.Bounds;
@@ -101,15 +101,15 @@ namespace LottieSamples.iOS
             {
                 this.animationView.Play();
             }
-            else if (this.animationView.AnimationProgress != 1)
+            else if (this.animationView.CurrentProgress != 1)
             {
-                NSOperationQueue.MainQueue.AddOperation(() => this.animationView.AnimationProgress = 1);
+                NSOperationQueue.MainQueue.AddOperation(() => this.animationView.CurrentProgress = 1);
             }
         }
 
         public void LoopAnimation()
         {
-            this.animationView.LoopAnimation = true;
+            this.animationView.LoopAnimationCount = -1;
         }
     }
 }
