@@ -26,14 +26,14 @@ namespace Airbnb.Lottie
 		nfloat CurrentFrame { get; set; }
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// +(BOOL)needsDisplayForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result));
 		[Static]
@@ -54,14 +54,14 @@ namespace Airbnb.Lottie
 	interface AnimationSubview
 	{
 		// -(instancetype _Nonnull)initWithFrame:(NSRect)frameRect __attribute__((objc_designated_initializer));
-		//[Export ("initWithFrame:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (CGRect frameRect);
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frameRect);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder coder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder coder);*/
 	}
 
 	// @interface LottieView
@@ -92,14 +92,14 @@ namespace Airbnb.Lottie
 		void AnimationWillEnterForeground ();
 
 		// -(instancetype _Nonnull)initWithFrame:(NSRect)frameRect __attribute__((objc_designated_initializer));
-		//[Export ("initWithFrame:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (CGRect frameRect);
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frameRect);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder coder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder coder);*/
 	}
 
 	// @interface AnimationView : LottieView
@@ -111,14 +111,14 @@ namespace Airbnb.Lottie
 		string AnimationName { get; set; }
 
 		// -(instancetype _Nonnull)initWithFrame:(CGRect)frame __attribute__((objc_designated_initializer));
-		//[Export ("initWithFrame:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (CGRect frame);
+		[Export ("initWithFrame:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (CGRect frame);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// @property (readonly, nonatomic) CGSize intrinsicContentSize;
 		[Export ("intrinsicContentSize")]
@@ -139,14 +139,14 @@ namespace Airbnb.Lottie
 	interface CompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface DebugLayer : CALayer
@@ -155,9 +155,9 @@ namespace Airbnb.Lottie
 	interface DebugLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface ImageCompositionLayer : CompositionLayer
@@ -165,14 +165,14 @@ namespace Airbnb.Lottie
 	interface ImageCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface InvertedMatteLayer : CALayer
@@ -181,14 +181,14 @@ namespace Airbnb.Lottie
 	interface InvertedMatteLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
 		[Export ("drawInContext:")]
@@ -201,14 +201,14 @@ namespace Airbnb.Lottie
 	interface MaskContainerLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface Lottie_Swift_335 (NSImage)
@@ -226,14 +226,14 @@ namespace Airbnb.Lottie
 	interface NullCompositionLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 	}
 
 	// @interface PreCompositionLayer : CompositionLayer
@@ -241,14 +241,14 @@ namespace Airbnb.Lottie
 	interface PreCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface ShapeCompositionLayer : CompositionLayer
@@ -256,14 +256,14 @@ namespace Airbnb.Lottie
 	interface ShapeCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface ShapeContainerLayer : CALayer
@@ -271,14 +271,14 @@ namespace Airbnb.Lottie
 	interface ShapeContainerLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 	}
 
 	// @interface ShapeRenderLayer : ShapeContainerLayer
@@ -287,14 +287,14 @@ namespace Airbnb.Lottie
 	interface ShapeRenderLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
 		[Export ("drawInContext:")]
@@ -306,14 +306,14 @@ namespace Airbnb.Lottie
 	interface SolidCompositionLayer
 	{
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 	}
 
 	// @interface TextCompositionLayer : CompositionLayer
@@ -321,14 +321,14 @@ namespace Airbnb.Lottie
 	interface TextCompositionLayer
 	{
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder aDecoder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 	}
 
 	// @interface TextLayer : CALayer
@@ -345,13 +345,13 @@ namespace Airbnb.Lottie
 		unsafe void DrawInContext (CGContext ctx);
 
 		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-		//[Export ("initWithLayer:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSObject layer);
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
 		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
-		//[Export ("initWithCoder:")]
-		//[DesignatedInitializer]
-		//IntPtr Constructor (NSCoder coder);
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder coder);*/
 	}
 }
