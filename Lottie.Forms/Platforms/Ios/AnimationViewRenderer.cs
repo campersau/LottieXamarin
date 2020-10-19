@@ -43,6 +43,9 @@ namespace Lottie.Forms.Platforms.Ios
                         //CacheEnable = e.NewElement.CacheComposition,
                         //CompletionBlock = _animationCompletionBlock
                     };
+                    // override lottie-ios so AutoresizingMask is working correctly
+                    // https://github.com/airbnb/lottie-ios/blob/1692cb4d0fcf0406dcaf61bf7cafea49dca51354/lottie-swift/src/Public/iOS/Compatibility/CompatibleAnimationView.swift#L296
+                    _animationView.TranslatesAutoresizingMaskIntoConstraints = true;
 
                     _animationView.CompatibleAnimation = e.NewElement.GetAnimation();
 

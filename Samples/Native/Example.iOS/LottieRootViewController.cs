@@ -23,6 +23,7 @@ namespace LottieSamples.iOS
 
             this.lottieLogo = new CompatibleAnimationView(CompatibleAnimation.Named("LottieLogo1"));
             this.lottieLogo.ContentMode = UIViewContentMode.ScaleAspectFill;
+            this.lottieLogo.TranslatesAutoresizingMaskIntoConstraints = true;
             this.View.AddSubview(this.lottieLogo);
 
             this.lottieButton = new UIButton(UIButtonType.Custom);

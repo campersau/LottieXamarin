@@ -37,6 +37,7 @@ namespace LottieSamples.iOS
             this.SetBackgroundColor(ViewBackgroundColorEnum.White);
 
             this.laAnimation = new CompatibleAnimationView();
+            this.laAnimation.TranslatesAutoresizingMaskIntoConstraints = true;
             this.toolbar = new UIToolbar(CGRect.Empty);
 
             UIBarButtonItem open = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, OpenEventHandler);
@@ -188,6 +189,7 @@ namespace LottieSamples.iOS
 
             this.laAnimation = new CompatibleAnimationView(CompatibleAnimation.Named(named));
             this.laAnimation.ContentMode = UIViewContentMode.ScaleAspectFit;
+            this.laAnimation.TranslatesAutoresizingMaskIntoConstraints = true;
             this.View.AddSubview(this.laAnimation);
             this.View.SetNeedsLayout();
 

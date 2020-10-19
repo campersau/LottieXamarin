@@ -20,6 +20,7 @@ namespace Example.tvOS
             this.lottieLogo.Frame = this.View.Bounds;
             this.lottieLogo.AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
             this.lottieLogo.LoopAnimationCount = -1;
+            this.lottieLogo.TranslatesAutoresizingMaskIntoConstraints = true;
             this.View.AddSubview(this.lottieLogo);
         }
 

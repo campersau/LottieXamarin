@@ -87,6 +87,7 @@ namespace LottieSamples.iOS
             this.character = sanatizedChar;
             this.animationView = new CompatibleAnimationView(CompatibleAnimation.Named("TypeFace/" + sanatizedChar));
             this.animationView.ContentMode = UIViewContentMode.ScaleAspectFit;
+            this.animationView.TranslatesAutoresizingMaskIntoConstraints = true;
             this.ContentView.AddSubview(this.animationView);
             CGRect c = this.ContentView.Bounds;
             this.animationView.Frame = new CGRect(-c.Size.Width, 0, c.Size.Width * 3, c.Size.Height);
