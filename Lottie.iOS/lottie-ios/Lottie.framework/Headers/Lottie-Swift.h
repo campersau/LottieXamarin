@@ -333,6 +333,7 @@ SWIFT_CLASS("_TtC6Lottie13AnimationView")
 
 
 @class NSDictionary;
+@class NSURL;
 @class NSBundle;
 
 /// An Objective-C compatible wrapper around Lottie’s Animation class.
@@ -341,6 +342,7 @@ SWIFT_CLASS("_TtC6Lottie19CompatibleAnimation")
 @interface CompatibleAnimation : NSObject
 + (CompatibleAnimation * _Nonnull)named:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 + (CompatibleAnimation * _Nonnull)animationFromJSON:(NSDictionary * _Nonnull)animationJSON SWIFT_WARN_UNUSED_RESULT;
++ (CompatibleAnimation * _Nonnull)animationFromURL:(NSURL * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name bundle:(NSBundle * _Nonnull)bundle OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -861,6 +863,7 @@ SWIFT_CLASS("_TtC6Lottie13AnimationView")
 
 
 @class NSDictionary;
+@class NSURL;
 @class NSBundle;
 
 /// An Objective-C compatible wrapper around Lottie’s Animation class.
@@ -869,6 +872,7 @@ SWIFT_CLASS("_TtC6Lottie19CompatibleAnimation")
 @interface CompatibleAnimation : NSObject
 + (CompatibleAnimation * _Nonnull)named:(NSString * _Nonnull)name SWIFT_WARN_UNUSED_RESULT;
 + (CompatibleAnimation * _Nonnull)animationFromJSON:(NSDictionary * _Nonnull)animationJSON SWIFT_WARN_UNUSED_RESULT;
++ (CompatibleAnimation * _Nonnull)animationFromURL:(NSURL * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithName:(NSString * _Nonnull)name bundle:(NSBundle * _Nonnull)bundle OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
