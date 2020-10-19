@@ -21,11 +21,26 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
 
       # build lottie-ios for different platforms
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-ios
-      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphoneos CONFIGURATION_BUILD_DIR=build/lottie-iphoneos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_iOS" -sdk iphonesimulator CONFIGURATION_BUILD_DIR=build/lottie-iphonesimulator
       - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_macOS" -sdk macosx CONFIGURATION_BUILD_DIR=build/lottie-macos
-      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-tvos
-      # - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvsimulator CONFIGURATION_BUILD_DIR=build/lottie-appletvsimulator
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvos CONFIGURATION_BUILD_DIR=build/lottie-appletvos
+      - run: xcodebuild -project "Lottie.xcodeproj" -configuration Release -scheme "Lottie_tvOS" -sdk appletvsimulator CONFIGURATION_BUILD_DIR=build/lottie-appletvsimulator
+
+      # create FAT ios framework
+      - run: cp -R build/lottie-iphoneos build/lottie-ios
+      - run: cp -R build/lottie-iphonesimulator/Lottie.framework/Modules/Lottie.swiftmodule/ build/lottie-ios/Lottie.framework/Modules/Lottie.swiftmodule/
+      - run: lipo -create -output build/lottie-ios/Lottie.framework/Lottie build/lottie-iphoneos/Lottie.framework/Lottie build/lottie-iphonesimulator/Lottie.framework/Lottie
+      - run: lipo -info build/lottie-ios/Lottie.framework/Lottie
+
+      # create FAT tvos framework
+      - run: cp -R build/lottie-appletvos build/lottie-tvos
+      - run: cp -R build/lottie-appletvsimulator/Lottie.framework/Modules/Lottie.swiftmodule/ build/lottie-tvos/Lottie.framework/Modules/Lottie.swiftmodule/
+      - run: lipo -create -output build/lottie-tvos/Lottie.framework/Lottie build/lottie-appletvos/Lottie.framework/Lottie build/lottie-appletvsimulator/Lottie.framework/Lottie
+      - run: lipo -info build/lottie-tvos/Lottie.framework/Lottie
+
+      # remove dSYMs and small frameworks
+      - run: rm -rf build/**/Lottie.framework.dSYM build/lottie-iphoneos build/lottie-iphonesimulator build/lottie-appletvos build/lottie-appletvsimulator
 
       # download sharpie
       - run: wget https://dl.xamarin.com/objective-sharpie/ObjectiveSharpie.pkg
@@ -36,9 +51,6 @@ jobs:
       - run: sharpie bind -sdk macosx10.15 -output "build/lottie-macos" -namespace "Airbnb.Lottie" -scope "build/lottie-macos/Lottie.framework/Headers" "build/lottie-macos/Lottie.framework/Headers/Lottie-Swift.h"
         continue-on-error: true
       - run: sharpie bind -output "build/lottie-tvos" -namespace "Airbnb.Lottie" -framework "build/lottie-tvos/Lottie.framework"
-
-      # remove dSYMs
-      - run: rm -rf build/**/Lottie.framework.dSYM
 
       # copy and rename bindings
       - run: mv build/lottie-ios/ApiDefinitions.cs build/ApiDefinitions.Ios.cs
