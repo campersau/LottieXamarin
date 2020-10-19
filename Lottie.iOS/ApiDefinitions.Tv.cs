@@ -83,48 +83,48 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface AnimationCompletionDelegate : NSObject <CAAnimationDelegate>
-	// [BaseType (typeof(NSObject), Name = "_TtC6Lottie27AnimationCompletionDelegate")]
-	// [DisableDefaultCtor]
-	// interface AnimationCompletionDelegate : ICAAnimationDelegate
-	// {
-	// 	// -(void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
-	// 	[Export ("animationDidStop:finished:")]
-	// 	void AnimationDidStop (CAAnimation anim, bool flag);
-	// }
+	[BaseType (typeof(NSObject), Name = "_TtC6Lottie27AnimationCompletionDelegate")]
+	[DisableDefaultCtor]
+	interface AnimationCompletionDelegate : ICAAnimationDelegate
+	{
+		// -(void)animationDidStop:(CAAnimation * _Nonnull)anim finished:(BOOL)flag;
+		[Export ("animationDidStop:finished:")]
+		void AnimationDidStop (CAAnimation anim, bool flag);
+	}
 
 	// @interface AnimationContainer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie18AnimationContainer")]
-	// [DisableDefaultCtor]
-	// interface AnimationContainer
-	// {
-	// 	// @property (nonatomic) CGFloat currentFrame;
-	// 	[Export ("currentFrame")]
-	// 	nfloat CurrentFrame { get; set; }
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18AnimationContainer")]
+	[DisableDefaultCtor]
+	interface AnimationContainer
+	{
+		// @property (nonatomic) CGFloat currentFrame;
+		[Export ("currentFrame")]
+		nfloat CurrentFrame { get; set; }
 
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// +(BOOL)needsDisplayForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result));
-	// 	[Static]
-	// 	[Export ("needsDisplayForKey:")]
-	// 	bool NeedsDisplayForKey (string key);
+		// +(BOOL)needsDisplayForKey:(NSString * _Nonnull)key __attribute__((warn_unused_result));
+		[Static]
+		[Export ("needsDisplayForKey:")]
+		bool NeedsDisplayForKey (string key);
 
-	// 	// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
-	// 	[Export ("actionForKey:")]
-	// 	[return: NullAllowed]
-	// 	CAAction ActionForKey (string @event);
+		// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
+		[Export ("actionForKey:")]
+		[return: NullAllowed]
+		CAAction ActionForKey (string @event);
 
-	// 	// -(void)display;
-	// 	[Export ("display")]
-	// 	void Display ();
-	// }
+		// -(void)display;
+		[Export ("display")]
+		void Display ();
+	}
 
 	// @interface AnimationSubview : UIView
 	[BaseType (typeof(UIView), Name = "_TtC6Lottie16AnimationSubview")]
@@ -387,214 +387,214 @@ namespace Airbnb.Lottie
 	}
 
 	// @interface CompositionLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie16CompositionLayer")]
-	// [DisableDefaultCtor]
-	// interface CompositionLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie16CompositionLayer")]
+	[DisableDefaultCtor]
+	interface CompositionLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface DebugLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie10DebugLayer")]
-	// [DisableDefaultCtor]
-	// interface DebugLayer
-	// {
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie10DebugLayer")]
+	[DisableDefaultCtor]
+	interface DebugLayer
+	{
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface ImageCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ImageCompositionLayer")]
-	// interface ImageCompositionLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ImageCompositionLayer")]
+	interface ImageCompositionLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface InvertedMatteLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie18InvertedMatteLayer")]
-	// [DisableDefaultCtor]
-	// interface InvertedMatteLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18InvertedMatteLayer")]
+	[DisableDefaultCtor]
+	interface InvertedMatteLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
-	// 	[Export ("drawInContext:")]
-	// 	unsafe void DrawInContext (CGContext ctx);
-	// }
+		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		[Export ("drawInContext:")]
+		unsafe void DrawInContext (CGContext ctx);
+	}
 
 	// @interface MaskContainerLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie18MaskContainerLayer")]
-	// [DisableDefaultCtor]
-	// interface MaskContainerLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie18MaskContainerLayer")]
+	[DisableDefaultCtor]
+	interface MaskContainerLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface NullCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20NullCompositionLayer")]
-	// interface NullCompositionLayer
-	// {
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20NullCompositionLayer")]
+	interface NullCompositionLayer
+	{
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
-	// }
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
+	}
 
 	// @interface PreCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie19PreCompositionLayer")]
-	// interface PreCompositionLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie19PreCompositionLayer")]
+	interface PreCompositionLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface ShapeCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ShapeCompositionLayer")]
-	// interface ShapeCompositionLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21ShapeCompositionLayer")]
+	interface ShapeCompositionLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface ShapeContainerLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie19ShapeContainerLayer")]
-	// interface ShapeContainerLayer
-	// {
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie19ShapeContainerLayer")]
+	interface ShapeContainerLayer
+	{
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
-	// }
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
+	}
 
 	// @interface ShapeRenderLayer : ShapeContainerLayer
-	// [BaseType (typeof(ShapeContainerLayer), Name = "_TtC6Lottie16ShapeRenderLayer")]
-	// [DisableDefaultCtor]
-	// interface ShapeRenderLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(ShapeContainerLayer), Name = "_TtC6Lottie16ShapeRenderLayer")]
+	[DisableDefaultCtor]
+	interface ShapeRenderLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
-	// 	[Export ("drawInContext:")]
-	// 	unsafe void DrawInContext (CGContext ctx);
-	// }
+		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		[Export ("drawInContext:")]
+		unsafe void DrawInContext (CGContext ctx);
+	}
 
 	// @interface SolidCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21SolidCompositionLayer")]
-	// interface SolidCompositionLayer
-	// {
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie21SolidCompositionLayer")]
+	interface SolidCompositionLayer
+	{
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
+	}
 
 	// @interface TextCompositionLayer : CompositionLayer
-	// [BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20TextCompositionLayer")]
-	// interface TextCompositionLayer
-	// {
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder aDecoder);*/
+	[BaseType (typeof(CompositionLayer), Name = "_TtC6Lottie20TextCompositionLayer")]
+	interface TextCompositionLayer
+	{
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)aDecoder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder aDecoder);*/
 
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
-	// }
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
+	}
 
 	// @interface TextLayer : CALayer
-	// [BaseType (typeof(CALayer), Name = "_TtC6Lottie9TextLayer")]
-	// interface TextLayer
-	// {
-	// 	// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
-	// 	[Export ("actionForKey:")]
-	// 	[return: NullAllowed]
-	// 	CAAction ActionForKey (string @event);
+	[BaseType (typeof(CALayer), Name = "_TtC6Lottie9TextLayer")]
+	interface TextLayer
+	{
+		// -(id<CAAction> _Nullable)actionForKey:(NSString * _Nonnull)event __attribute__((warn_unused_result));
+		[Export ("actionForKey:")]
+		[return: NullAllowed]
+		CAAction ActionForKey (string @event);
 
-	// 	// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
-	// 	[Export ("drawInContext:")]
-	// 	unsafe void DrawInContext (CGContext ctx);
+		// -(void)drawInContext:(CGContextRef _Nonnull)ctx;
+		[Export ("drawInContext:")]
+		unsafe void DrawInContext (CGContext ctx);
 
-	// 	// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
-	// 	[Export ("initWithLayer:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSObject layer);
+		// -(instancetype _Nonnull)initWithLayer:(id _Nonnull)layer __attribute__((objc_designated_initializer));
+		[Export ("initWithLayer:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSObject layer);
 
-	// 	// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
-	// 	/*[Export ("initWithCoder:")]
-	// 	[DesignatedInitializer]
-	// 	IntPtr Constructor (NSCoder coder);*/
-	// }
+		// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
+		/*[Export ("initWithCoder:")]
+		[DesignatedInitializer]
+		IntPtr Constructor (NSCoder coder);*/
+	}
 }
