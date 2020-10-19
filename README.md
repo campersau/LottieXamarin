@@ -188,7 +188,7 @@ Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LOTAnimationView:
 ```c#
-LOTAnimationView animation = LOTAnimationView.AnimationNamed("LottieLogo1");
+CompatibleAnimationView animation = new CompatibleAnimationView(CompatibleAnimation.Named("LottieLogo1"));
 this.View.AddSubview(animation);
 animation.PlayWithCompletion((animationFinished) => {
   // Do Something
@@ -197,19 +197,15 @@ animation.PlayWithCompletion((animationFinished) => {
 //var animationFinished = await animation.PlayAsync();
 ```
 
-Or you can load it programmatically from a NSUrl
-```c#
-LOTAnimationView animation = new LOTAnimationView(new NSUrl(url));
-this.View.AddSubview(animation);
-```
-
 Lottie supports the iOS `UIViewContentModes` ScaleAspectFit and ScaleAspectFill
+
+Using `AutoresizingMask` requires setting `TranslatesAutoresizingMaskIntoConstraints` to `true` as it is not enabled by default.
 
 You can also set the animation progress interactively.
 ```c#
 CGPoint translation = gesture.GetTranslationInView(this.View);
 nfloat progress = translation.Y / this.View.Bounds.Size.Height;
-animationView.AnimationProgress = progress;
+animationView.CurrentProgress = progress;
 ```
 
 Want to mask arbitrary views to animation layers in a Lottie View?
@@ -217,41 +213,10 @@ Easy-peasy as long as you know the name of the layer from After Effects
 
 ```c#
 UIView snapshot = this.View.SnapshotView(afterScreenUpdates: true);
-lottieAnimation.AddSubview(snapshot, layer: "AfterEffectsLayerName");
+lottieAnimation.AddSubview(snapshot, new CompatibleAnimationKeypath("AfterEffectsLayerName"));
 ```
 
-Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
-
-```c#
-#region View Controller Transitioning
-public class LOTAnimationTransitionDelegate : UIViewControllerTransitioningDelegate
-{
-    public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForPresentedController(UIViewController presented, UIViewController presenting, UIViewController source)
-    {
-        LOTAnimationTransitionController animationController =
-            new LOTAnimationTransitionController(
-            animation: "vcTransition1",
-            fromLayer: "outLayer",
-            toLayer: "inLayer");
-
-        return animationController;
-    }
-
-    public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForDismissedController(UIViewController dismissed)
-    {
-        LOTAnimationTransitionController animationController = 
-            new LOTAnimationTransitionController(
-                animation: "vcTransition2",
-                fromLayer: "outLayer",
-                toLayer: "inLayer");
-
-        return animationController;
-    } 
-}
-#endregion
-```
-
-If your animation will be frequently reused, `LOTAnimationView` has an built in LRU Caching Strategy.
+If your animation will be frequently reused, `CompatibleAnimationView` has an built in LRU Caching Strategy.
 
 
 ## Supported After Effects Features

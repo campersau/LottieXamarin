@@ -4,21 +4,18 @@ using Foundation;
 
 namespace Airbnb.Lottie
 {
-	/*
-    public partial class LOTAnimationView
+    public partial class CompatibleAnimationView
     {
         /// <summary>
         /// Asynchronously play the animation.
         /// </summary>
-        public async Task<bool> PlayAsync()
+        public Task<bool> PlayAsync()
         {
             var tcs = new TaskCompletionSource<bool>();
-            
-            this.CompletionBlock = animationFinished => tcs.SetResult(true);
-            
-            this.Play();
 
-            return await tcs.Task;
+            this.PlayWithCompletion(animationFinished => tcs.SetResult(true));
+
+            return tcs.Task;
         }
 
 		/// <summary>
@@ -29,7 +26,7 @@ namespace Airbnb.Lottie
 		{
 			var tcs = new TaskCompletionSource<bool>();
 
-			this.PlayToProgress(toProgress, (bool animationFinished) => tcs.SetResult(animationFinished));
+			this.PlayFromProgress(CurrentProgress, toProgress, (bool animationFinished) => tcs.SetResult(animationFinished));
 
 			return tcs.Task;
 		}
@@ -43,16 +40,16 @@ namespace Airbnb.Lottie
 			return tcs.Task;
 		}
 
-		public Task<bool> PlayToFrameAsync(NSNumber toFrame)
+		public Task<bool> PlayToFrameAsync(nfloat toFrame)
 		{
 			var tcs = new TaskCompletionSource<bool>();
 
-			this.PlayToFrame(toFrame, (bool animationFinished) => tcs.SetResult(animationFinished));
+			this.PlayFromFrame(CurrentFrame, toFrame, (bool animationFinished) => tcs.SetResult(animationFinished));
 
 			return tcs.Task;
 		}
 
-		public Task<bool> PlayFromFrameAsync(NSNumber fromStartFrame, NSNumber toEndFrame)
+		public Task<bool> PlayFromFrameAsync(nfloat fromStartFrame, nfloat toEndFrame)
 		{
 			var tcs = new TaskCompletionSource<bool>();
 
@@ -62,5 +59,4 @@ namespace Airbnb.Lottie
 		}
 
     }
-	*/
 }

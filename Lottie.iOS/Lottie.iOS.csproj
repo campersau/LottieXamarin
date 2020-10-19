@@ -19,7 +19,7 @@
     
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-    <Compile Include="LOTAnimationView.cs" />
+    <Compile Include="CompatibleAnimationView.cs" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
